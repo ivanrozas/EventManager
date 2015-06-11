@@ -21,6 +21,13 @@ public interface EventManager
     void registerListener(String listenerKey, InterviewEventListener listener);
 
     /**
+     * 
+     * @param listenerKey
+     * @param listener
+     */
+    void registerSpecialListener(String listenerKey, InterviewEventListener listener);
+    
+    /**
      * Unregister a listener so that it will no longer receive events. If no listener is
      * registered under this key, nothing will happen.
      *

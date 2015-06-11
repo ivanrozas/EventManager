@@ -53,6 +53,28 @@ public class DefaultEventManager implements EventManager
 
         listeners.put(listenerKey, listener);
     }
+    
+    public void registerSpecialListener(String listenerKey, InterviewEventListener listener)
+    {
+        if (listenerKey == null || listenerKey.equals(""))
+            throw new IllegalArgumentException("Key for the listener must not be null: " + listenerKey);
+
+        if (listener == null)
+            throw new IllegalArgumentException("The listener must not be null: " + listener);
+
+        if (listeners.containsKey(listenerKey))
+            unregisterListener(listenerKey);
+
+        Class[] classes = listener.getHandledEventClasses();
+
+        if (classes != null){
+	        for (int i = 0; i < classes.length; i++)
+	        	addToListenerList(classes[i], listener);
+	        
+	        listeners.put(listenerKey, listener);
+        }
+        
+    }
 
     public void unregisterListener(String listenerKey)
     {
